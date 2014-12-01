@@ -4,13 +4,25 @@
   "name": "PointRoll PageBoy",
   "description": "This extension provides information on PointRoll ads.",
   "version": "0.9",
-
+  
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["v1.js"]
+    }
+  ],
+  
+  "background": {
+    "scripts": ["background.js"],
+	"persistent": false
+  },
+  
   "browser_action": {
+    "default_title": "Test",
     "default_icon": "icon.PNG",
     "default_popup": "popup.html"
   },
   "permissions": [
-    "https://*/*",
-	"http://*/*"
+	"activeTab"
   ]
 }

@@ -1,19 +1,17 @@
-/* Regex-pattern to check URLs against. 
-   It matches URLs like: http[s]://[...]stackoverflow.com[...] */
-var urlRegex = /^file:\/\/\/:?/;
+/* When the browser-action button is clicked... */console.log("background");
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {debugger;
+    /*...check the URL of the active tab against our pattern and... */
+        /* ...if it matches, send a message specifying a callback too */
+        sendDom();
+});
 
 /* A function creator for callbacks */
-function doStuffWithDOM(element) {
-    alert("I received the following DOM content:\n" + element);
+function doStuffWithDOM(domContent) {debugger;console.log("test2");
+    /*document.write("<table>", "<tr>", "<td>", "Iframes on Page:", "</td>", "<td>", domContent, "</td>", "</tr>", "</table>");*/
 }
 
-/* When the browser-action button is clicked... */
-chrome.browserAction.onClicked.addListener(function(tab) {
-debugger;
-    /*...check the URL of the active tab against our pattern and... */
-    if (urlRegex.test(tab.url)) {
-        /* ...if it matches, send a message specifying a callback too */
-        chrome.tabs.sendMessage(tab.id, { text: "report_back" },
-                                doStuffWithDOM);
-    }
-});
+var sendDom = function() {
+    chrome.tabs.getSelected(null, function(tab){
+        chrome.tabs.sendMessage(tab.id, {type: "dom-report"});
+    });
+}
