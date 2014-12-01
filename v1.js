@@ -2,10 +2,12 @@ console.log("v1");
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	sendResponse({
 		title:getTitle(),
-		num_iframes:getIframes(),
 		flash_version:getFlash(),
+		chrome_version:getBrowserVersion(),
+		num_iframes:getIframes(),
 		is_secure:getSecure(),
 		domain_match:getDomains()
+		
 	});
 });
 //writes PointRoll Page Buddy to top of page with line break
@@ -45,3 +47,11 @@ function getDomains() {
         return false;
     }
 }
+
+function getBrowserVersion(){
+    var ua=navigator.userAgent,tem,chromeVersion=ua.match(/(chrome(?=\/))\/?\s*(\d+)/i) || [];                                                                                                                         
+    chromeVersion=chromeVersion[2]? [chromeVersion[1], chromeVersion[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem=ua.match(/version\/(\d+)/i))!=null) {chromeVersion.splice(1,1,tem[1]);}
+	return chromeVersion[1];
+    }
+

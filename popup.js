@@ -9,13 +9,14 @@ window.onload = function() {debugger;
 /* A function creator for callbacks */
 function doStuffWithDOM(domContent) {
 	var content = document.getElementById("content");
-	content.innerHTML+=domContent.title+"<br/>";
-	content.innerHTML+="Iframes on Page:" + domContent.num_iframes +"<br/>";
-	content.innerHTML+="Flash Version:" +domContent.flash_version+"<br/>";
-    content.innerHTML+=domContent.is_secure?
-		"Secure Protocol: Page Secure":"Secure Protocol: SSL Protocol not detected...";
+	content.innerHTML+=domContent.title + "<br/><br/>";
+	content.innerHTML+="Chrome Version: " + domContent.chrome_version+"<br/>";
+	content.innerHTML+="Flash Version: " + domContent.flash_version+"<br/>";
+	content.innerHTML+="Iframes on Page: " + domContent.num_iframes +"<br/>";
+	content.innerHTML+=domContent.is_secure?
+	"Secure Protocol: Page Secure":"Secure Protocol: SSL Protocol not detected...";
 	content.innerHTML+="<br/>";
-	content.innerHTML+=domContent.getDomains?"loc.href vs doc.dom: MATCH":"loc.href vs doc.dom:MISMATCH";
+	content.innerHTML+=domContent.getDomains?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH";
 }
 
 function sendDom(){
