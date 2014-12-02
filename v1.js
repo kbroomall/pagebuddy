@@ -18,6 +18,7 @@ function getTitle() {
 function getAds() {
 	var ads = [];
 	var adIndex = 0;
+	
 	for (var i=0; i < document.scripts.length; i++)
 	{
 		if(document.getElementsByTagName("script")[i].src.indexOf("ads.pointroll.com")>0)
@@ -25,21 +26,26 @@ function getAds() {
 			var temp = document.getElementsByTagName("script")[i].src.split("pid=")[1];
 			if (typeof(temp) != "undefined")
 			{
-				ads[adIndex]=temp.slice(7);
+				ads[adIndex]=temp.slice(0,7);
 				adIndex++;
 			}
 		}
 	}
 	
-	for (var i=0; i < document.getElementsByTagName("iframe").length; i++)
+	for (var i=0; i < window.frames.length; i++)
 	{
-		if(document.getElementsByTagName("iframe")[i].innerHTML.indexOf("ads.pointroll.com")>0)
+		console.log(window.frames[i].document.scripts);
+		var frameScripts = window.frames[i].document.scripts;
+		for (var j=0; j < frameScripts.length; j++)
 		{
-			var temp = document.getElementsByTagName("iframe")[i].innerHTML.split("pid=")[1];
-			if (typeof(temp) != "undefined")
+			if(frameScripts[j].src.indexOf("ads.pointroll.com")>0)
 			{
-				ads[adIndex]=temp.slice(7);
-				adIndex++;
+				var temp = frameScripts[j].src.split("pid=")[1];
+				if (typeof(temp) != "undefined")
+				{
+					ads[adIndex]=temp.slice(0,7);
+					adIndex++;
+				}
 			}
 		}
 	}

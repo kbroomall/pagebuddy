@@ -19,7 +19,7 @@ function doStuffWithDOM(domContent) {
 	content.innerHTML+=domContent.getDomains?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH";
 	for (var i=0;i<domContent.ads.length;i++)
 	{
-		content.innerHTML+="<br/>"+domContent.ads[i];
+		content.innerHTML+="<br/><a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>";
 	}
 }
 
