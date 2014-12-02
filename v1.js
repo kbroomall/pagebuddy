@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 });
 //writes PointRoll Page Buddy to top of page with line break
 function getTitle() {
-    return "PointRoll PageBuddy v.09";
+    return "PageBuddy v.1.0";
 }
 
 function getAds() {

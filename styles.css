@@ -1,8 +1,12 @@
       body {
         min-width: 400px;
         overflow-x: hidden;
-		color: #00CC00;
+		color: #000;
 		font-family: 'VT323';
-		background-color: #000;
+		background-color: #fff;
         font-size: 20px;
+}
+
+#logo {
+max-width: 50%;
 }
