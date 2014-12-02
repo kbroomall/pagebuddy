@@ -2,11 +2,8 @@
         min-width: 400px;
         overflow-x: hidden;
 		color: #000;
-		font-family: 'VT323';
+		font-family: "Oswald";
 		background-color: #fff;
-        font-size: 20px;
+        font-size: 16px;
 }
 
-#logo {
-max-width: 50%;
-}
