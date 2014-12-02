@@ -6,13 +6,44 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		chrome_version:getBrowserVersion(),
 		num_iframes:getIframes(),
 		is_secure:getSecure(),
-		domain_match:getDomains()
-		
+		domain_match:getDomains(),
+		ads:getAds()
 	});
 });
 //writes PointRoll Page Buddy to top of page with line break
 function getTitle() {
     return "PointRoll PageBuddy v.09";
+}
+
+function getAds() {
+	var ads = [];
+	var adIndex = 0;
+	for (var i=0; i < document.scripts.length; i++)
+	{
+		if(document.getElementsByTagName("script")[i].src.indexOf("ads.pointroll.com")>0)
+		{
+			var temp = document.getElementsByTagName("script")[i].src.split("pid=")[1];
+			if (typeof(temp) != "undefined")
+			{
+				ads[adIndex]=temp.slice(7);
+				adIndex++;
+			}
+		}
+	}
+	
+	for (var i=0; i < document.getElementsByTagName("iframe").length; i++)
+	{
+		if(document.getElementsByTagName("iframe")[i].innerHTML.indexOf("ads.pointroll.com")>0)
+		{
+			var temp = document.getElementsByTagName("iframe")[i].innerHTML.split("pid=")[1];
+			if (typeof(temp) != "undefined")
+			{
+				ads[adIndex]=temp.slice(7);
+				adIndex++;
+			}
+		}
+	}
+	return ads;
 }
 
 //check flash version and return to window

@@ -17,6 +17,10 @@ function doStuffWithDOM(domContent) {
 	"Secure Protocol: Page Secure":"Secure Protocol: SSL Protocol not detected...";
 	content.innerHTML+="<br/>";
 	content.innerHTML+=domContent.getDomains?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH";
+	for (var i=0;i<domContent.ads.length;i++)
+	{
+		content.innerHTML+="<br/>"+domContent.ads[i];
+	}
 }
 
 function sendDom(){
