@@ -14,13 +14,14 @@ function doStuffWithDOM(domContent) {
 	content.innerHTML+="Flash Version: " + domContent.flash_version+"<br/>";
 	content.innerHTML+="Iframes on Page: " + domContent.num_iframes +"<br/>";
 	content.innerHTML+=domContent.is_secure?
-	"Secure Protocol: Page Secure":"Secure Protocol: SSL Protocol not detected...";
+	"Secure Protocol: Secure":"NOT Secure...";
 	content.innerHTML+="<br/>";
-	content.innerHTML+=domContent.getDomains?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH";
+	content.innerHTML+=domContent.getDomains?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH" +"<br/><br/>";
 	for (var i=0;i<domContent.ads.length;i++)
 	{
-		content.innerHTML+="<br/><a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>";
+		content.innerHTML+="PointRoll RM Ads on Page:"+"<br/><a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>" + "<br/><br/>";
 	}
+	content.innerHTML+="Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 }
 
 function sendDom(){

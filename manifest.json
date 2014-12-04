@@ -19,9 +19,13 @@
   
   "browser_action": {
     "default_title": "Test",
-    "default_icon": "icon.PNG",
     "default_popup": "popup.html"
   },
+  
+  "icons": { "16": "icon16.PNG",
+           "48": "icon48.PNG",
+          "128": "icon128.PNG" },
+  
   "permissions": [
 	"activeTab"
   ]

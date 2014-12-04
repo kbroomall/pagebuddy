@@ -7,7 +7,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		num_iframes:getIframes(),
 		is_secure:getSecure(),
 		domain_match:getDomains(),
-		ads:getAds()
+		ads:getAds(),
+		site_events:getSiteEvents()
 	});
 });
 //writes PointRoll Page Buddy to top of page with line break
@@ -15,6 +16,12 @@ function getTitle() {
     return "PageBuddy v.1.0";
 }
 
+//Displays site Events on the page
+function getSiteEvents() {
+
+	}
+	
+//Displays links to PointRoll pids that link to AdPortal
 function getAds() {
 	var ads = [];
 	var adIndex = 0;
