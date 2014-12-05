@@ -9,7 +9,7 @@ window.onload = function() {debugger;
 /* A function creator for callbacks */
 function doStuffWithDOM(domContent) {
 	var content = document.getElementById("content");
-	content.innerHTML+=domContent.title + "<br/><br/>";
+	content.innerHTML+="<span>" + domContent.title + "</span><br/><br/>";
 	content.innerHTML+="Chrome Version: " + domContent.chrome_version+"<br/>";
 	content.innerHTML+="Flash Version: " + domContent.flash_version+"<br/>";
 	content.innerHTML+="Iframes on Page: " + domContent.num_iframes +"<br/>";

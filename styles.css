@@ -1,9 +1,15 @@
-      body {
-        min-width: 400px;
-        overflow-x: hidden;
-		color: #000;
-		font-family: "Oswald";
-		background-color: #fff;
-        font-size: 16px;
+body {
+	min-width: 400px;
+	overflow-x: hidden;
+	color: #000;
+	font-family: "Oswald";
+	background-color: #fff;
+	font-size: 16px;
 }
 
+span {
+	display: block;
+	text-align:right;
+	float:right;
+	margin:-10px 24px 0 0;
+}
