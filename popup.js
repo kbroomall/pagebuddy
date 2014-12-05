@@ -16,7 +16,7 @@ function doStuffWithDOM(domContent) {
 	content.innerHTML+=domContent.is_secure?
 	"Secure Protocol: Secure":"NOT Secure...";
 	content.innerHTML+="<br/>";
-	content.innerHTML+=domContent.getDomains?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH" +"<br/><br/>";
+	content.innerHTML+=(domContent.domain_match?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH")+"<br/>";
 	content.innerHTML+="PointRoll RM Ads on Page:"+"<br/>"
 	for (var i=0;i<domContent.ads.length;i++)
 	{
