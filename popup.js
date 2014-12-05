@@ -17,7 +17,7 @@ function doStuffWithDOM(domContent) {
 	"Secure Protocol: Secure":"NOT Secure...";
 	content.innerHTML+="<br/>";
 	content.innerHTML+=(domContent.domain_match?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH")+"<br/>";
-	content.innerHTML+="PointRoll RM Ads on Page:"+"<br/>"
+	content.innerHTML+="<br/>"+"PointRoll RM Ads on Page:"+"<br/>";
 	for (var i=0;i<domContent.ads.length;i++)
 	{
 		content.innerHTML+="PID "+(i+1)+": "+"<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>"+domContent.ads[i]+"</a>" + "<br/>";
