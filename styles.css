@@ -20,6 +20,7 @@ padding: 10px;
 border: 1px solid;
 border-radius: 10px;
 background-color: #f6f6f6;
+margin-bottom: 10px;
 }
 
 #title {
@@ -28,4 +29,11 @@ border: 1px solid;
 border-radius: 10px;
 background-color: #f6f6f6;
 margin-bottom: 10px;
+}
+
+#advanced {
+padding: 10px;
+border: 1px solid;
+border-radius: 10px;
+background-color: #f6f6f6;
 }
