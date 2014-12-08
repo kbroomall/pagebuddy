@@ -22,7 +22,7 @@ function doStuffWithDOM(domContent) {
 	adinfo.innerHTML+="PointRoll RM Ads on Page:"+"<br/>";
 	for (var i=0;i<domContent.ads.length;i++)
 	{
-		content.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>" + "<br/>";
+		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>" + "<br/>";
 	}
 	adinfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 }
