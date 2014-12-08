@@ -1,9 +1,31 @@
-      body {
-        min-width: 400px;
-        overflow-x: hidden;
-		color: #000;
-		font-family: "Oswald";
-		background-color: #fff;
-        font-size: 16px;
+body {
+	min-width: 400px;
+	overflow-x: hidden;
+	color: #000;
+	font-family: "Oswald";
+	background-color: #fff;
+	font-size: 16px;
 }
 
+#adinfo {
+padding: 10px;
+border: 1px solid;
+border-radius: 10px;
+background-color: #f6f6f6;
+margin-bottom: 10px;
+}
+
+#content {
+padding: 10px;
+border: 1px solid;
+border-radius: 10px;
+background-color: #f6f6f6;
+}
+
+#title {
+padding: 10px;
+border: 1px solid;
+border-radius: 10px;
+background-color: #f6f6f6;
+margin-bottom: 10px;
+}
