@@ -7,9 +7,25 @@ body {
 	font-size: 16px;
 }
 
+#adinfo {
+padding: 10px;
+border: 1px solid;
+border-radius: 10px;
+background-color: #f6f6f6;
+margin-bottom: 10px;
+}
+
 #content {
 padding: 10px;
 border: 1px solid;
 border-radius: 10px;
 background-color: #f6f6f6;
+}
+
+#title {
+padding: 10px;
+border: 1px solid;
+border-radius: 10px;
+background-color: #f6f6f6;
+margin-bottom: 10px;
 }

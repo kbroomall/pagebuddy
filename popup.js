@@ -9,7 +9,9 @@ window.onload = function() {debugger;
 /* A function creator for callbacks */
 function doStuffWithDOM(domContent) {
 	var content = document.getElementById("content");
-	content.innerHTML+="<span>" + domContent.title + "</span><br/><br/>";
+	var adinfo = document.getElementById("adinfo");
+	var title = document.getElementById("title");
+	title.innerHTML+="<span>" + domContent.title + "</span>";
 	content.innerHTML+="Chrome Version: " + domContent.chrome_version+"<br/>";
 	content.innerHTML+="Flash Version: " + domContent.flash_version+"<br/>";
 	content.innerHTML+="Iframes on Page: " + domContent.num_iframes +"<br/>";
@@ -17,12 +19,12 @@ function doStuffWithDOM(domContent) {
 	"Secure Protocol: Secure":"NOT Secure...";
 	content.innerHTML+="<br/>";
 	content.innerHTML+=(domContent.domain_match?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH")+"<br/>";
-	content.innerHTML+="<br/>"+"PointRoll RM Ads on Page:"+"<br/>";
+	adinfo.innerHTML+="PointRoll RM Ads on Page:"+"<br/>";
 	for (var i=0;i<domContent.ads.length;i++)
 	{
 		content.innerHTML+="PID "+(i+1)+": "+"<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>"+domContent.ads[i]+"</a>" + "<br/>";
 	}
-	content.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
+	adinfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 }
 
 function sendDom(){
