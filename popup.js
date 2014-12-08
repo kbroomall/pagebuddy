@@ -11,7 +11,7 @@ function doStuffWithDOM(domContent) {
 	var content = document.getElementById("content");
 	content.innerHTML+=domContent.title + "<br/><br/>";
 	content.innerHTML+="Chrome Version: " + domContent.chrome_version+"<br/>";
-	content.innerHTML+="Flash Version: " + domContent.flash_version+"<br/>";
+	content.innerHTML+="Flash Version: " + domContent.flash_version+"<font size='1'>  <a target='_blank' href='http://helpx.adobe.com/flash-player.html'>more</a></font><br/>";
 	content.innerHTML+="Iframes on Page: " + domContent.num_iframes +"<br/>";
 	content.innerHTML+=domContent.is_secure?
 	"Secure Protocol: Secure":"NOT Secure...";
@@ -20,7 +20,7 @@ function doStuffWithDOM(domContent) {
 	content.innerHTML+="PointRoll RM Ads on Page:"+"<br/>"
 	for (var i=0;i<domContent.ads.length;i++)
 	{
-		content.innerHTML+="PID "+(i+1)+": "+"<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>"+domContent.ads[i]+"</a>" + "<br/>";
+		content.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>" + "<br/>";
 	}
 	content.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 }
