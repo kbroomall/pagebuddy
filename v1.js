@@ -1,19 +1,19 @@
 console.log("v1");
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-	console.log(message.type);
-	if(message.type=="dom_request"){
-		sendResponse({
-			title:getTitle(),
-			flash_version:getFlash(),
-			chrome_version:getBrowserVersion(),
-			num_iframes:getIframes(),
-			is_secure:getSecure(),
-			domain_match:getDomains(),
-			ads:getAds(),
-			site_events:getSiteEvents()
-		});
-	}
+	if(message.type=='dom_request'){
+	sendResponse({
+		title:getTitle(),
+		flash_version:getFlash(),
+		chrome_version:getBrowserVersion(),
+		num_iframes:getIframes(),
+		is_secure:getSecure(),
+		domain_match:getDomains(),
+		ads:getAds(),
+		site_events:getSiteEvents()
+	});}
+	else if(message.type=='pr_pin'){prPinAllPanels();}
+	
 });
 //writes PointRoll Page Buddy to top of page with line break
 function getTitle() {
@@ -102,3 +102,16 @@ function getBrowserVersion(){
     if((tem=ua.match(/version\/(\d+)/i))!=null) {chromeVersion.splice(1,1,tem[1]);}
 	return chromeVersion[1];
     }
+
+/* Function to cause all ads to pin when opened */
+function prPinAllPanels(){
+console.log("start of panel pin events");
+window.addEventListener("load", prPin, false);
+//parent.window.prAddEvent('pi',(function(z){prpc='1';
+console.log("inside of PI event to pin");
+};
+
+
+
+
+

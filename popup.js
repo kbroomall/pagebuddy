@@ -49,3 +49,29 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		adinfo.innerHTML += message.adID + "<br/>";
 	}
 });*/
+}
+
+function prPinPRADS(){
+chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  chrome.tabs.sendMessage(tabs[0].id, {type: "pr_pin"}, function(response) {
+    console.log("panel_pin");
+	});
+});
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var link = document.getElementById('pin');
+    // onClick's logic below:
+    link.addEventListener('click', function() {
+        prPinPRADS();
+    });
+});
+
+
+
+
+
+
+
+
+
