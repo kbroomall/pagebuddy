@@ -1,4 +1,9 @@
 console.log("popup");
+
+var content;
+var adinfo;
+var title;
+	
 /* When the browser-action button is clicked... */
 window.onload = function() {debugger;
     /*...check the URL of the active tab against our pattern and... */
@@ -8,9 +13,9 @@ window.onload = function() {debugger;
 
 /* A function creator for callbacks */
 function doStuffWithDOM(domContent) {
-	var content = document.getElementById("content");
-	var adinfo = document.getElementById("adinfo");
-	var title = document.getElementById("title");
+	content = document.getElementById("content");
+	adinfo = document.getElementById("adinfo");
+	title = document.getElementById("title");
 	title.innerHTML+="<span>" + domContent.title + "</span>";
 	content.innerHTML+="Chrome Version: " + domContent.chrome_version+"<br/>";
 	content.innerHTML+="Flash Version: " + domContent.flash_version+"<font size='1'>  <a target='_blank' href='http://helpx.adobe.com/flash-player.html'>more</a></font><br/>";
@@ -35,3 +40,12 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
   });
 });
 }
+
+/*chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+	if(message.type=="ad_call")
+	{
+		console.log(message.adID);
+		adinfo = document.getElementById("adinfo");
+		adinfo.innerHTML += message.adID + "<br/>";
+	}
+});*/

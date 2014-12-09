@@ -1,15 +1,19 @@
 console.log("v1");
+
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-	sendResponse({
-		title:getTitle(),
-		flash_version:getFlash(),
-		chrome_version:getBrowserVersion(),
-		num_iframes:getIframes(),
-		is_secure:getSecure(),
-		domain_match:getDomains(),
-		ads:getAds(),
-		site_events:getSiteEvents()
-	});
+	console.log(message.type);
+	if(message.type=="dom_request"){
+		sendResponse({
+			title:getTitle(),
+			flash_version:getFlash(),
+			chrome_version:getBrowserVersion(),
+			num_iframes:getIframes(),
+			is_secure:getSecure(),
+			domain_match:getDomains(),
+			ads:getAds(),
+			site_events:getSiteEvents()
+		});
+	}
 });
 //writes PointRoll Page Buddy to top of page with line break
 function getTitle() {
@@ -98,4 +102,3 @@ function getBrowserVersion(){
     if((tem=ua.match(/version\/(\d+)/i))!=null) {chromeVersion.splice(1,1,tem[1]);}
 	return chromeVersion[1];
     }
-
