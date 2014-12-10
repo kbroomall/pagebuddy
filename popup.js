@@ -25,11 +25,24 @@ function doStuffWithDOM(domContent) {
 	content.innerHTML+="<br/>";
 	content.innerHTML+=(domContent.domain_match?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH")+"<br/>";
 	adinfo.innerHTML+="PointRoll RM Ads on Page:"+"<br/>";
+	
+	/* Grab adIds passed from dev tools network tab from local storage*/
+	
+	/*try{chrome.storage.local.get("adIds", getAdsFromStorage);}catch(e){}*/
+	
 	for (var i=0;i<domContent.ads.length;i++)
 	{
 		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>" + "<br/>";
 	}
 	adinfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
+}
+
+function getAdsfromStorage (ads)
+{
+	for (i in ads)
+	{
+		adinfo.innerHTML += ads[i];
+	}
 }
 
 function sendDom(){
@@ -41,22 +54,24 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 });
 }
 
+/* This was being used to grab ad calls from network tab in real time. May need to be scrapped or reworked. */
+
 /*chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+	try{alert(message.adID);}catch(e){}
 	if(message.type=="ad_call")
 	{
-		console.log(message.adID);
+		try{alert(message.adID);}catch(e){}
 		adinfo = document.getElementById("adinfo");
 		adinfo.innerHTML += message.adID + "<br/>";
 	}
 });*/
-}
 
 function prPinPRADS(){
-chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-  chrome.tabs.sendMessage(tabs[0].id, {type: "pr_pin"}, function(response) {
-    console.log("panel_pin");
-	});
-});
+	chrome.runtime.sendMessage({type:"panel_pin"});
+}
+
+function prClosePRADS(){
+	chrome.runtime.sendMessage({type:"panel_close"});
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -64,6 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // onClick's logic below:
     link.addEventListener('click', function() {
         prPinPRADS();
+    });
+	
+	link = document.getElementById("close");
+	
+	link.addEventListener('click', function() {
+        prClosePRADS();
     });
 });
 

@@ -1,43 +1,47 @@
 var connections = {};
+var myPort;
 
-console.log("background");
+/* clean up old ad info. Also need to add functionality to refresh this on page reload */
+chrome.storage.local.remove("adIds");
 
 chrome.runtime.onConnect.addListener(function (port) {
-console.log("connect to backgorund");
-    var extensionListener = function (message, sender, sendResponse) {
-        // The original connection event doesn't include the tab ID of the
-        // DevTools page, so we need to send it explicitly.
-        if (message.name == "init") {
-          connections[message.tabId] = port;
-          return;
-        }
-		else if (message.type=="ad_call")
+	port.onMessage.addListener(function(message, sender, sendResponse) {
+		/* Grab ad call info from network tab and pass it to popup. 
+		   Seems to be more or less working, but needs better detection of when popup is open.*/
+		if (message.type == "ad_call")
 		{
-			/*chrome.runtime.sendMessage(message);*/
-			/*chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			  chrome.tabs.sendMessage(tabs[0].id, message);
-			});*/
-			/*var popup = chrome.extension.getViews({type:'popup'})
-			popup.console.log(message.adID);
-			popup.adinfo = popup.document.getElementById("adinfo");
-			popup.adinfo.innerHTML += message.adID + "<br/>";*/
+			/*if (chrome.extension.getViews({type:"popup"}))
+			{
+				chrome.storage.local.get(function(cfg) {
+				  if(typeof(cfg["adIds"]) !== 'undefined' && cfg["adIds"] instanceof Array) { 
+					cfg["adIds"].push(message.adID);
+				  } else {
+					cfg["adIds"] = [message.adID];
+				  }
+				  chrome.storage.local.set(cfg); 
+				});
+			}
+			else
+			{
+				chrome.runtime.sendMessage(message);
+			}*/
 		}
-
-	// other message handling
-    }
-
+		/* if we don't need to communicate with popup, pass the message along */
+		else
+		{
+			chrome.runtime.sendMessage(message);
+		}
+	});
     // Listen to messages sent from the DevTools page
-    port.onMessage.addListener(extensionListener);
+    chrome.runtime.onMessage.addListener(function (message) {
+		try{port.postMessage(message);}catch(e){}
+	// other message handling
+    });
 
     port.onDisconnect.addListener(function(port) {
         port.onMessage.removeListener(extensionListener);
 
-        var tabs = Object.keys(connections);
-        for (var i=0, len=tabs.length; i < len; i++) {
-          if (connections[tabs[i]] == port) {
-            delete connections[tabs[i]]
-            break;
-          }
-        }
+		delete myPort;
+
     });
 });
