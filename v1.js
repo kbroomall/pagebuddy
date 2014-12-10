@@ -111,6 +111,3 @@ console.log("inside of PI event to pin");
 };
 
 
-
-
-
