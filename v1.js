@@ -1,5 +1,4 @@
 console.log("v1");
-
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	if(message.type=='dom_request'){
 	sendResponse({
@@ -15,6 +14,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	else if(message.type=='pr_pin'){prPinAllPanels();}
 	
 });
+
 //writes PointRoll Page Buddy to top of page with line break
 function getTitle() {
     return "PageBuddy v.1.0";
