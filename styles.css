@@ -6,10 +6,23 @@ body {
 	background-color: #fff;
 	font-size: 15px;
 	padding-top:10px;
-	padding-bottom:10px;
+	padding-bottom:0px;
 
 }
 
+/* Set the fixed height of the footer here */
+#footer {
+  height: 40px;
+  background-color: #000;
+  color: #fff;
+}
+
+#footer a {
+  color: #fff;
+  float: right;
+  font-size: 10px;
+  padding: 10px;
+}
 
 #adinfo {
 padding: 10px;

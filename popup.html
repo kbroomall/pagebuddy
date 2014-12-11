@@ -1,8 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
-	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <title>PointRoll Page Buddy</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link rel="stylesheet" href="pure-min.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
@@ -17,44 +16,67 @@
   </head>
   <body>
 	<img id="logo" src="pointroll.PNG">
-	<div id="title"></div>
+	<div id="title">
+    </div>
   	
 	<div role="tabpanel">
-
-	<!-- Nav tabs -->
-	<ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">RM Ads</a></li>
-	<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Page Info</a></li>
-	<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Advanced</a></li>
-	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Requests</a></li>
-	</ul>
-
+      
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+            RM Ads
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+            Page Info
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+            Advanced
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">
+            Requests
+          </a>
+        </li>
+      </ul>
+      
 	  <!-- Tab panes -->
-	<div class="tab-content">
-	  <div role="tabpanel" class="tab-pane fade in active" id="home"><div id="adinfo"></div></div>
-	  <div role="tabpanel" class="tab-pane fade" id="profile"><div id="content"></div></div>
-	  <div role="tabpanel" class="tab-pane fade" id="messages">
-	  
-		<div id="advanced">
-			<button class="btn pure-button pure-button-active" id="pin">Pin Panel</button>
-			<button class="btn pure-button pure-button-active" id="close">Close Panel</button>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="home">
+          <div id="adinfo">
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="profile">
+          <div id="content">
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="messages">
+          
+          <div id="advanced">
+			<button class="btn pure-button pure-button-active" id="pin">
+              Pin Panel
+          </button>
+          <button class="btn pure-button pure-button-active" id="close">
+            Close Panel
+          </button>
 		</div>
-	  
+        
 	  </div>
-	  <div role="tabpanel" class="tab-pane fade" id="settings">Requests</div>
-	</div>
-
+	  <div role="tabpanel" class="tab-pane fade" id="settings">
+        Requests
+      </div>
+      </div>
+      
+    </div>
+    
+<div id="footer">
+<a href="mailto:PTR-CampaignDevelopmentList@pointroll.com?subject=PageBuddy&body=Please enter your feedback below" target="_blank">Send Feedback</a>
 </div>
-	
-	<!--
-	<div id="adinfo"></div>
-	<div id="content"></div>
-	<div id="advanced">
-	<div id="requests">REQUESTS</div>
-	<button class="btn pure-button pure-button-active" id="pin">Pin Panel</button>
-	<button class="btn pure-button pure-button-active" id="close">Close Panel</button>
-	</div>
-	-->
 	
   </body>
 </html>
