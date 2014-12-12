@@ -111,4 +111,19 @@ window.addEventListener("load", prPin, false);
 console.log("inside of PI event to pin");
 };
 
+/* ad highlighting function, c=color o=opacity*/
+function prHighlight(c,o){
+for(n=0;n<(prids.split(',').length);n++){
+try{
+document.getElementById("prw"+prids.split(',')[n]).style.background=c;
+document.getElementById("prflsh"+prids.split(',')[n]).style.opacity=o;
+}catch(e){}
+}}
+
+
+
+
+
+
+
 
