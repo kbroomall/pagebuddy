@@ -46,7 +46,7 @@
       </ul>
       
 	  <!-- Tab panes -->
-      <div class="tab-content">
+      <div id="advanced-tab" class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="home">
           <div id="adinfo">
           </div>
@@ -58,14 +58,17 @@
         <div role="tabpanel" class="tab-pane fade" id="messages">
           
           <div id="advanced">
-			<button class="btn pure-button pure-button-active" id="pin">
+			<button class="btn btn-default" id="pin">
               Pin Panel
           </button>
-          <button class="btn pure-button pure-button-active" id="close">
+          <button class="btn btn-default" id="close">
             Close Panel
           </button>
-		</div>
-        
+		  <div id="highlight" class="btn-group" role="group" aria-label="...">
+			  <button id="highlight-on" type="button" class="btn btn-default">Highlight ON</button>
+			  <button id="highlight-on" type="button" class="btn btn-default">Highlight OFF</button>
+		  </div>
+		  </div>
 	  </div>
 	  <div role="tabpanel" class="tab-pane fade" id="settings">
         Requests
@@ -75,7 +78,10 @@
     </div>
     
 	<div id="footer">
-	<a href="https://support.pointroll.com" target="_blank" title="To provide feedback submit a ticket to PointRoll Campaign Technical Support"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+	<a id="feedback" href="https://support.pointroll.com" target="_blank" title="To provide feedback submit a ticket to PointRoll Campaign Technical Support"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+	<a id="settings" href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+	<a id="paperclip" href="info.html" target="_blank"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+	
 	</div>
 	
   </body>

@@ -3,7 +3,7 @@
 
   "name": "PointRoll PageBuddy",
   "description": "This extension provides information on PointRoll ads.",
-  "version": "1.1",
+  "version": "0.9",
   
   "devtools_page": "devtools.html",
   
