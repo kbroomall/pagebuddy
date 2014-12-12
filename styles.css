@@ -9,6 +9,10 @@ body {
 
 }
 
+#logo {
+padding: 10px;
+}
+
 /* Set the fixed height of the footer here */
 #footer {
   height: 40px;
@@ -18,27 +22,25 @@ body {
 
 #footer a {
   color: #666;
-  font-size: 10px;
+  font-size: 4px;
   float: left;
-  padding: 14px;
+  padding: 12px;
 }
 
 #adinfo {
 padding: 10px;
 background-color: #f6f6f6;
-margin-bottom: 10px;
+/* margin-bottom: 10px; */
 }
 
 #content {
 padding: 10px;
 background-color: #f6f6f6;
-margin-bottom: 10px;
 }
 
 #title {
 padding: 10px;
 background-color: #f6f6f6;
-margin-bottom: 10px;
 }
 
 #advanced {
@@ -52,9 +54,13 @@ font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 font-size: 12px;
 }
 
+.glyphicon {
+font-size: 16px;
+}
+
 span.glyphicon.glyphicon-warning-sign {
 color: #FFCC00;
-padding: 10px;
+padding: 5px;
 }	
 
 #messages p {
