@@ -3,6 +3,9 @@ console.log("popup");
 var content;
 var adinfo;
 var title;
+var siteEventInfo;
+
+var background = chrome.extension.getBackgroundPage();
 	
 /* When the browser-action button is clicked... */
 window.onload = function() {debugger;
@@ -15,6 +18,7 @@ window.onload = function() {debugger;
 function doStuffWithDOM(domContent) {
 	content = document.getElementById("content");
 	adinfo = document.getElementById("adinfo");
+	siteEventInfo = document.getElementById("siteeventinfo");
 	title = document.getElementById("title");
 	title.innerHTML+="<span>" + domContent.title + "</span>";
 	content.innerHTML+="Chrome Version: " + domContent.chrome_version+"<br/>";
@@ -32,9 +36,9 @@ function doStuffWithDOM(domContent) {
 	
 	for (var i=0;i<domContent.ads.length;i++)
 	{
-		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>" + "<br/>";
+		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.adIds[i]+"'>Ad "+(i+1)+": " + background.adIds[i]+"</a>" + "<br/>";
 	}
-	adinfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
+	siteEventInfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 
 }
 
@@ -63,15 +67,14 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
 /* This was being used to grab ad calls from network tab in real time. May need to be scrapped or reworked. */
 
-/*chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-	try{alert(message.adID);}catch(e){}
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	if(message.type=="ad_call")
 	{
-		try{alert(message.adID);}catch(e){}
 		adinfo = document.getElementById("adinfo");
-		adinfo.innerHTML += message.adID + "<br/>";
+		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.adIds[i]+"'>Ad "+(i+1)+": " + background.adIds[i]+"</a>" + "<br/>";
+		/*try{console.log(message.details);}catch(e){}*/
 	}
-});*/
+});
 
 function prPinPRADS(){
 	chrome.runtime.sendMessage({type:"panel_pin"});
@@ -96,6 +99,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 console.log("test");
-
-
-
