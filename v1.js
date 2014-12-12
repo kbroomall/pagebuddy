@@ -1,4 +1,5 @@
 console.log("v1");
+
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	if(message.type=='dom_request'){
 	sendResponse({
@@ -9,12 +10,12 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		is_secure:getSecure(),
 		domain_match:getDomains(),
 		ads:getAds(),
-		site_events:getSiteEvents()
+		site_events:getSiteEvents(),
+		prids:getPRIds()
 	});}
 	else if(message.type=='pr_pin'){prPinAllPanels();}
 	
 });
-
 //writes PointRoll Page Buddy to top of page with line break
 function getTitle() {
     return "PageBuddy v.1.0";
@@ -23,7 +24,16 @@ function getTitle() {
 //Displays site Events on the page
 function getSiteEvents() {
 
-	}
+}
+
+function getPRIds(){
+	var th = document.getElementsByTagName('body')[0];
+	    var s = document.createElement('script');
+	    s.setAttribute('type', 'text/javascript');
+	    s.innerText = "var a = document.createElement('p'); a.id='pridsElement';a.innerText=prids;document.body.appendChild(a)";
+	    th.appendChild(s);
+	    alert(document.getElementById('pridsElement').innerText)
+}
 	
 //Displays links to PointRoll pids that link to AdPortal
 function getAds() {
@@ -60,6 +70,8 @@ function getAds() {
 			}
 		}
 	}
+
+
 	return ads;
 }
 
