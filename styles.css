@@ -52,6 +52,18 @@ font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 font-size: 12px;
 }
 
+span.glyphicon.glyphicon-warning-sign {
+color: #FFCC00;
+padding: 10px;
+}	
+
+#messages p {
+padding: 10px;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 12px;
+display: inline;
+}
+
 .btn {
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
