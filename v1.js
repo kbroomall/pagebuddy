@@ -38,8 +38,7 @@ function addScript(script){
 }
 
 function getPRIds(){
-	addScript("var a = document.createElement('p'); a.id='pridsElement'; a.style.display='none'; a.innerText=prids;document.body.appendChild(a)");
-	return document.getElementById("pridsElement").innerText;
+	return getDomVariable("prids");
 }
 	
 //Displays links to PointRoll pids that link to AdPortal
@@ -140,7 +139,11 @@ function prHighlight(c,o){
 	addScript(script);
 }
 
-
+function getDomVariable (variable)
+{
+	addScript("var a = document.createElement('p'); a.id='"+variable+"Element'; a.style.display='none'; a.innerText="+variable+";document.body.appendChild(a)");
+	return document.getElementById("pridsElement").innerText;
+}
 
 
 
