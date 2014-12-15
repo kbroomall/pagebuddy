@@ -78,7 +78,9 @@ display: inline;
 }
 
 
-
+.prInjectedScript {
+  display:none;
+}
 
 
 

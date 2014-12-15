@@ -1,4 +1,5 @@
 console.log("v1");
+
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	if(message.type=='dom_request'){
 	sendResponse({
@@ -9,12 +10,16 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		is_secure:getSecure(),
 		domain_match:getDomains(),
 		ads:getAds(),
-		site_events:getSiteEvents()
+		site_events:getSiteEvents(),
+		prids:getPRIds()
 	});}
 	else if(message.type=='pr_pin'){prPinAllPanels();}
+	else if(message.type=='pr_highlight')
+	{
+		prHighlight(message.color, message.opacity);
+	}
 	
 });
-
 //writes PointRoll Page Buddy to top of page with line break
 function getTitle() {
     return "PageBuddy v.1.0";
@@ -23,7 +28,21 @@ function getTitle() {
 //Displays site Events on the page
 function getSiteEvents() {
 
-	}
+}
+
+function addScript(script){
+	var th = document.getElementsByTagName('body')[0];
+	    var s = document.createElement('script');
+	    s.setAttribute('type', 'text/javascript');
+	    s.innerText = script;
+		s.setAttribute('class','prInjectedScript');
+	    th.appendChild(s);
+	    /*alert(document.getElementById('pridsElement').innerText)*/
+}
+
+function getPRIds(){
+	addScript("var a = document.createElement('p'); a.id='pridsElement';a.innerText=prids;document.body.appendChild(a)");
+}
 	
 //Displays links to PointRoll pids that link to AdPortal
 function getAds() {
@@ -60,6 +79,8 @@ function getAds() {
 			}
 		}
 	}
+
+
 	return ads;
 }
 
@@ -113,12 +134,13 @@ console.log("inside of PI event to pin");
 
 /* ad highlighting function, c=color o=opacity*/
 function prHighlight(c,o){
-for(n=0;n<(prids.split(',').length);n++){
-try{
-document.getElementById("prw"+prids.split(',')[n]).style.background=c;
-document.getElementById("prflsh"+prids.split(',')[n]).style.opacity=o;
-}catch(e){}
-}}
+	var script = "for(n=0;n<(prids.split(',').length);n++){"
+	script += "try{"
+	script += "document.getElementById('prw'+prids.split(',')[n]).style.backgroundColor='"+c+"';";
+	script += "document.getElementById('prflsh'+prids.split(',')[n]).style.opacity='"+o+"';"
+	script+= "}catch(e){}}";
+	addScript(script);
+}
 
 
 

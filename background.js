@@ -1,8 +1,17 @@
 var connections = {};
 var myPort;
+var ads = new Array();
+
+chrome.runtime.onMessage.addListener (function(message){
+	if (message.type == "delete_adids")
+	{
+		delete ads
+		ads = new Array();
+	}
+});
 
 /* clean up old ad info. Also need to add functionality to refresh this on page reload */
-chrome.storage.local.remove("adIds");
+/*chrome.storage.local.remove("adIds");*/
 
 chrome.runtime.onConnect.addListener(function (port) {
 	port.onMessage.addListener(function(message, sender, sendResponse) {
@@ -45,6 +54,22 @@ chrome.runtime.onConnect.addListener(function (port) {
 
     });
 });
+
 chrome.webRequest.onCompleted.addListener(function(details){
-	console.log(details.statusCode + '  ' + details.url);
+	if (details.url.indexOf("PortalServe")>-1)
+	{
+		var newAdId = details.url.split("pid=")[1].slice(0,7);
+		var ad = {id:newAdId, status:details.statusCode};
+		try{ads.push(ad);}catch(e){alert(e.message);}
+		if (chrome.extension.getViews({type: "popup"}).length > 0)
+		{
+			chrome.runtime.sendMessage({type:"ad_call", status: details.statusCode, adID: newAdId});
+			/*backgroundPageConnection.postMessage({
+				type: "ad_call",
+				tabId: chrome.devtools.inspectedWindow.tabId,
+				adID: request.request.url.split("pid=")[1].slice(0,7)
+			});*/
+		}
+	}
 },{urls: [ "<all_urls>" ]},['responseHeaders']);
+
