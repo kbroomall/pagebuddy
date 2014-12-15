@@ -87,6 +87,13 @@ function prClosePRADS(){
 	chrome.runtime.sendMessage({type:"panel_close"});
 }
 
+function prHighlight(color, opacity){
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, {type:"pr_highlight", color:color, opacity:opacity}, function(response) {
+		});
+	});
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var link = document.getElementById('pin');
     // onClick's logic below:
@@ -98,5 +105,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	link.addEventListener('click', function() {
         prClosePRADS();
+    });
+	
+		link = document.getElementById("highlight-on");
+	
+	link.addEventListener('click', function() {
+        prHighlight('#00ff00', .5);
+    });
+	
+		link = document.getElementById("highlight-off");
+	
+	link.addEventListener('click', function() {
+        prHighlight('#ffffff', 1);
     });
 });
