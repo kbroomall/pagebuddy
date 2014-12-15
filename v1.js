@@ -36,12 +36,14 @@ function addScript(script){
 	    s.setAttribute('type', 'text/javascript');
 	    s.innerText = script;
 		s.setAttribute('class','prInjectedScript');
+		s.style.display="none";
 	    th.appendChild(s);
 	    /*alert(document.getElementById('pridsElement').innerText)*/
 }
 
 function getPRIds(){
-	addScript("var a = document.createElement('p'); a.id='pridsElement';a.innerText=prids;document.body.appendChild(a)");
+	addScript("var a = document.createElement('p'); a.id='pridsElement'; a.style.display='none'; a.innerText=prids;document.body.appendChild(a)");
+	return document.getElementById("pridsElement").innerText;
 }
 	
 //Displays links to PointRoll pids that link to AdPortal
