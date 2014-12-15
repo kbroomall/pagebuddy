@@ -3,7 +3,11 @@ console.log("popup");
 var content;
 var adinfo;
 var title;
-	
+var siteEventInfo;
+var adCount = 0;
+
+var background = chrome.extension.getBackgroundPage();
+
 /* When the browser-action button is clicked... */
 window.onload = function() {debugger;
     /*...check the URL of the active tab against our pattern and... */
@@ -15,6 +19,7 @@ window.onload = function() {debugger;
 function doStuffWithDOM(domContent) {
 	content = document.getElementById("content");
 	adinfo = document.getElementById("adinfo");
+	siteEventInfo = document.getElementById("siteeventinfo");
 	title = document.getElementById("title");
 	title.innerHTML+="<span>" + domContent.title + "</span>";
 	content.innerHTML+="Chrome Version: " + domContent.chrome_version+"<br/>";
@@ -26,15 +31,17 @@ function doStuffWithDOM(domContent) {
 	content.innerHTML+=(domContent.domain_match?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH")+"<br/>";
 	adinfo.innerHTML+="PointRoll RM Ads on Page:"+"<br/>";
 	
-	/* Grab adIds passed from dev tools network tab from local storage*/
+	/* Grab adIds passed from dev tools network tab from local storage (currently deprecated as we can use direct access to background page instead,
+	   but keeping this for now in case its needed for other pieces).*/
 	
 	/*try{chrome.storage.local.get("adIds", getAdsFromStorage);}catch(e){}*/
-	
+
 	for (var i=0;i<domContent.ads.length;i++)
 	{
-		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+domContent.ads[i]+"'>Ad "+(i+1)+": "+domContent.ads[i]+"</a>" + "<br/>";
+		adCount++;
+		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.ads[i].id+"'>Ad "+(i+1)+": " + background.ads[i].id+" (Status "+background.ads[i].status+")</a>" + "<br/>";
 	}
-	adinfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
+	siteEventInfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 
 }
 
@@ -63,15 +70,14 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
 /* This was being used to grab ad calls from network tab in real time. May need to be scrapped or reworked. */
 
-/*chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-	try{alert(message.adID);}catch(e){}
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	if(message.type=="ad_call")
 	{
-		try{alert(message.adID);}catch(e){}
+		adCount++;
 		adinfo = document.getElementById("adinfo");
-		adinfo.innerHTML += message.adID + "<br/>";
+		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+message.adID+"'>Ad "+adCount+": " + message.adID+" (Status "+message.status+")</a><br/>";
 	}
-});*/
+});
 
 function prPinPRADS(){
 	chrome.runtime.sendMessage({type:"panel_pin"});
@@ -94,8 +100,3 @@ document.addEventListener('DOMContentLoaded', function() {
         prClosePRADS();
     });
 });
-
-console.log("test");
-
-
-
