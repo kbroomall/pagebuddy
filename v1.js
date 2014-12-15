@@ -3,7 +3,6 @@ console.log("v1");
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	if(message.type=='dom_request'){
 	sendResponse({
-		title:getTitle(),
 		flash_version:getFlash(),
 		chrome_version:getBrowserVersion(),
 		num_iframes:getIframes(),
@@ -20,10 +19,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	}
 	
 });
-//writes PointRoll Page Buddy to top of page with line break
-function getTitle() {
-    return "PageBuddy v.1.0";
-}
+
 
 //Displays site Events on the page
 function getSiteEvents() {

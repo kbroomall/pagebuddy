@@ -2,10 +2,8 @@ console.log("popup");
 
 var content;
 var adinfo;
-var title;
 var siteEventInfo;
 var adCount = 0;
-
 var background = chrome.extension.getBackgroundPage();
 
 /* When the browser-action button is clicked... */
@@ -20,8 +18,6 @@ function doStuffWithDOM(domContent) {
 	content = document.getElementById("content");
 	adinfo = document.getElementById("adinfo");
 	siteEventInfo = document.getElementById("siteeventinfo");
-	title = document.getElementById("title");
-	title.innerHTML+="<span>" + domContent.title + "</span>";
 	content.innerHTML+="Chrome Version: " + domContent.chrome_version+"<br/>";
 	content.innerHTML+="Flash Version: " + domContent.flash_version+"<font size='1'>  <a target='_blank' href='http://helpx.adobe.com/flash-player.html'>more</a></font><br/>";
 	content.innerHTML+="Iframes on Page: " + domContent.num_iframes +"<br/>";
