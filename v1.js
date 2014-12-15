@@ -14,8 +14,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	else if(message.type=='pr_pin'){prPinAllPanels();}
 	
 });
-var background = chrome.extension.getBackgroundPage();
-window.onunload(alert("deleting background.adIds");delete background.adIds; background.adIds=new Array(););
+
+document.addEventListener('onunload', function() {alert('deleting background.adIds');chrome.runtime.sendMessage({type:'delete_adids'});});
 
 //writes PointRoll Page Buddy to top of page with line break
 function getTitle() {

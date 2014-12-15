@@ -4,9 +4,10 @@ var content;
 var adinfo;
 var title;
 var siteEventInfo;
+var adCount = 0;
 
 var background = chrome.extension.getBackgroundPage();
-	
+
 /* When the browser-action button is clicked... */
 window.onload = function() {debugger;
     /*...check the URL of the active tab against our pattern and... */
@@ -30,13 +31,15 @@ function doStuffWithDOM(domContent) {
 	content.innerHTML+=(domContent.domain_match?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH")+"<br/>";
 	adinfo.innerHTML+="PointRoll RM Ads on Page:"+"<br/>";
 	
-	/* Grab adIds passed from dev tools network tab from local storage*/
+	/* Grab adIds passed from dev tools network tab from local storage (currently deprecated as we can use direct access to background page instead,
+	   but keeping this for now in case its needed for other pieces).*/
 	
 	/*try{chrome.storage.local.get("adIds", getAdsFromStorage);}catch(e){}*/
-	
+
 	for (var i=0;i<domContent.ads.length;i++)
 	{
-		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.adIds[i]+"'>Ad "+(i+1)+": " + background.adIds[i]+"</a>" + "<br/>";
+		adCount++;
+		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.ads[i].id+"'>Ad "+(i+1)+": " + background.ads[i].id+" (Status "+background.ads[i].status+")</a>" + "<br/>";
 	}
 	siteEventInfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 
@@ -70,9 +73,9 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	if(message.type=="ad_call")
 	{
+		adCount++;
 		adinfo = document.getElementById("adinfo");
-		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.adIds[i]+"'>Ad "+(i+1)+": " + background.adIds[i]+"</a>" + "<br/>";
-		/*try{console.log(message.details);}catch(e){}*/
+		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+message.adID+"'>Ad "+adCount+": " + message.adID+" (Status "+message.status+")</a><br/>";
 	}
 });
 
@@ -97,5 +100,3 @@ document.addEventListener('DOMContentLoaded', function() {
         prClosePRADS();
     });
 });
-
-console.log("test");
