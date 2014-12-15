@@ -45,6 +45,8 @@ chrome.runtime.onConnect.addListener(function (port) {
 
     });
 });
+
 chrome.webRequest.onCompleted.addListener(function(details){
 	console.log(details.statusCode + '  ' + details.url);
 },{urls: [ "<all_urls>" ]},['responseHeaders']);
+
