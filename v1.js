@@ -145,8 +145,21 @@ function getDomVariable (variable)
 	return document.getElementById("pridsElement").innerText;
 }
 
-
-
-
+/* Add JS function to parent page. Pass it the function, name of the function, and argument list as array. Currently only supports string arguments.*/
+function addFunction (script, scriptName, args)
+{
+	addScript(script.toLocaleString());
+	var functionCall = scriptName + "(";
+	for (i=0;i<args.length;i++)
+	{
+		functionCall += "'" + args[i] + "'";
+		if (i<args.length-1)
+		{
+			functionCall += ",";
+		}
+	}
+	functionCall += ");"
+	addScript(functionCall);
+}
 
 
