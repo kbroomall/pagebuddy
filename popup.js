@@ -111,13 +111,13 @@ function passPRHighlight(bannercolor, panelcolor, opacity){
 				document.getElementById('prf'+prids.split(',')[n]).style.backgroundColor=panelcolor;
 			}catch(e){}
 		}
-		if(prup!=0){document.getElementById('prinner'+prids.split(',').pop()).style.opacity=opacity;
-			prAddEvent('pi',(function(z){
-				for(n=0;n<(prids.split(',').length);n++){
-					try{document.getElementById('prinner'+prids.split(',')[n]).style.opacity="+o+";}catch(e){}
-				}
-			}));
-		}
+		if(prup!=0){document.getElementById('prinner'+prids.split(',').pop()).style.opacity=opacity;}
+		prAddEvent('pi',(function(z){
+			for(n=0;n<(prids.split(',').length);n++){
+				try{document.getElementById('prinner'+prids.split(',')[n]).style.opacity=opacity;}catch(e){}
+			}
+		}));
+		
 	};
 	
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
