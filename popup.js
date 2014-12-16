@@ -83,9 +83,9 @@ function prClosePRADS(){
 	chrome.runtime.sendMessage({type:"panel_close"});
 }
 
-function prHighlight(color, opacity){
+function prHighlight(bannercolor, panelcolor, opacity){
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {type:"pr_highlight", color:color, opacity:opacity}, function(response) {
+		chrome.tabs.sendMessage(tabs[0].id, {type:"pr_highlight", bannercolor:bannercolor, panelcolor:panelcolor, opacity:opacity}, function(response) {
 		});
 	});
 }
@@ -106,12 +106,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		link = document.getElementById("highlight-on");
 	
 	link.addEventListener('click', function() {
-        prHighlight('#00ff00', .5);
+        prHighlight('green','red', 0.5);
     });
 	
 		link = document.getElementById("highlight-off");
 	
 	link.addEventListener('click', function() {
-        prHighlight('#ffffff', 1);
+        prHighlight('transparent','transparent', 1);
     });
 });

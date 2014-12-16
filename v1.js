@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	else if(message.type=='pr_pin'){prPinAllPanels();}
 	else if(message.type=='pr_highlight')
 	{
-		prHighlight(message.color, message.opacity);
+		prHighlight(message.bannercolor, message.panelcolor, message.opacity);
 	}
 	
 });
@@ -130,12 +130,17 @@ console.log("inside of PI event to pin");
 };
 
 /* ad highlighting function, c=color o=opacity*/
-function prHighlight(c,o){
+function prHighlight(bc,pc,o){
 	var script = "for(n=0;n<(prids.split(',').length);n++){"
 	script += "try{"
-	script += "document.getElementById('prw'+prids.split(',')[n]).style.backgroundColor='"+c+"';";
+	script += "document.getElementById('prw'+prids.split(',')[n]).style.backgroundColor='"+bc+"';";
 	script += "document.getElementById('prflsh'+prids.split(',')[n]).style.opacity='"+o+"';"
-	script+= "}catch(e){}}";
+	script += "document.getElementById('prf'+prids.split(',')[n]).style.backgroundColor='"+pc+"';";
+	script += "}catch(e){}}";
+	script += "if(prup!=0){document.getElementById('prinner'+prids.split(',').pop()).style.opacity="+o+";}";
+	script += "prAddEvent('pi',(function(z){";
+	script += "for(n=0;n<(prids.split(',').length);n++){";
+	script += "try{document.getElementById('prinner'+prids.split(',')[n]).style.opacity="+o+";}catch(e){}}}));";
 	addScript(script);
 }
 
