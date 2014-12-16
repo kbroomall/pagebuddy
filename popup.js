@@ -75,43 +75,93 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	}
 });
 
-function prPinPRADS(){
-	chrome.runtime.sendMessage({type:"panel_pin"});
+function passPRPinADS(){
+	var passedFunction = function prPinAds() {
+		prAddEvent('pi',function(){prpc=1;});
+	};
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, {type:"injected_function", passed_function:passedFunction.toLocaleString(), function_name:"prPinAds"}, function(response) {
+		});
+	});
 }
 
-function prClosePRADS(){
-	chrome.runtime.sendMessage({type:"panel_close"});
+function passPRCloseADS(){
+	var passedFunction = function prCloseAds() {
+		prClose();
+	};
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, {type:"injected_function", passed_function:passedFunction.toLocaleString(), function_name:"prCloseAds"}, function(response) {
+		});
+	});
 }
 
-function prHighlight(bannercolor, panelcolor, opacity){
+/*function prHighlight(bannercolor, panelcolor, opacity){
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {type:"pr_highlight", bannercolor:bannercolor, panelcolor:panelcolor, opacity:opacity}, function(response) {
 		});
 	});
+}*/
+
+function passPRHighlight(bannercolor, panelcolor, opacity){
+	var passedFunction = function prHighlight(bannercolor, panelcolor, opacity) {
+		for(n=0;n<(prids.split(',').length);n++){
+			try{
+				document.getElementById('prw'+prids.split(',')[n]).style.backgroundColor=bannercolor;
+				document.getElementById('prflsh'+prids.split(',')[n]).style.opacity=opacity;
+				document.getElementById('prf'+prids.split(',')[n]).style.backgroundColor=panelcolor;
+			}catch(e){}
+		}
+		if(prup!=0){document.getElementById('prinner'+prids.split(',').pop()).style.opacity=opacity;
+			prAddEvent('pi',(function(z){
+				for(n=0;n<(prids.split(',').length);n++){
+					try{document.getElementById('prinner'+prids.split(',')[n]).style.opacity="+o+";}catch(e){}
+				}
+			}));
+		}
+	};
+	
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, {type:"injected_function", passed_function:passedFunction.toLocaleString(), args:[bannercolor, panelcolor, opacity], function_name:"prHighlight"}, function(response) {
+		});
+	});
+}
+
+function prHighlight(bc,pc,o){
+	var script = "for(n=0;n<(prids.split(',').length);n++){"
+	script += "try{"
+	script += "document.getElementById('prw'+prids.split(',')[n]).style.backgroundColor='"+bc+"';";
+	script += "document.getElementById('prflsh'+prids.split(',')[n]).style.opacity='"+o+"';"
+	script += "document.getElementById('prf'+prids.split(',')[n]).style.backgroundColor='"+pc+"';";
+	script += "}catch(e){}}";
+	script += "if(prup!=0){document.getElementById('prinner'+prids.split(',').pop()).style.opacity="+o+";}";
+	script += "prAddEvent('pi',(function(z){";
+	script += "for(n=0;n<(prids.split(',').length);n++){";
+	script += "try{document.getElementById('prinner'+prids.split(',')[n]).style.opacity="+o+";}catch(e){}}}));";
+	addScript(script);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     var link = document.getElementById('pin');
     // onClick's logic below:
     link.addEventListener('click', function() {
-        prPinPRADS();
+        passPRPinADS();
     });
 	
 	link = document.getElementById("close");
 	
 	link.addEventListener('click', function() {
-        prClosePRADS();
+        passPRCloseADS();
     });
 	
 		link = document.getElementById("highlight-on");
 	
 	link.addEventListener('click', function() {
-        prHighlight('green','red', 0.5);
+        passPRHighlight('green','red', 0.5);
     });
 	
 		link = document.getElementById("highlight-off");
 	
 	link.addEventListener('click', function() {
-        prHighlight('transparent','transparent', 1);
+        passPRHighlight('transparent','transparent', 1);
     });
 });

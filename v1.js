@@ -17,7 +17,17 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	{
 		prHighlight(message.bannercolor, message.panelcolor, message.opacity);
 	}
-	
+	else if(message.type=='injected_function')
+	{
+		if(message.args)
+		{
+			addFunction(message.passed_function, message.function_name, message.args);
+		}
+		else
+		{
+			addFunction(message.passed_function, message.function_name);
+		}
+	}
 });
 
 
@@ -130,7 +140,7 @@ console.log("inside of PI event to pin");
 };
 
 /* ad highlighting function, c=color o=opacity*/
-function prHighlight(bc,pc,o){
+/*function prHighlight(bc,pc,o){
 	var script = "for(n=0;n<(prids.split(',').length);n++){"
 	script += "try{"
 	script += "document.getElementById('prw'+prids.split(',')[n]).style.backgroundColor='"+bc+"';";
@@ -142,7 +152,7 @@ function prHighlight(bc,pc,o){
 	script += "for(n=0;n<(prids.split(',').length);n++){";
 	script += "try{document.getElementById('prinner'+prids.split(',')[n]).style.opacity="+o+";}catch(e){}}}));";
 	addScript(script);
-}
+}*/
 
 function getDomVariable (variable)
 {
@@ -153,14 +163,17 @@ function getDomVariable (variable)
 /* Add JS function to parent page. Pass it the function, name of the function, and argument list as array. Currently only supports string arguments.*/
 function addFunction (script, scriptName, args)
 {
-	addScript(script.toLocaleString());
+	addScript(script);
 	var functionCall = scriptName + "(";
-	for (i=0;i<args.length;i++)
+	if(typeof(args) !== "undefined")
 	{
-		functionCall += "'" + args[i] + "'";
-		if (i<args.length-1)
+		for (i=0;i<args.length;i++)
 		{
-			functionCall += ",";
+			functionCall += "'" + args[i] + "'";
+			if (i<args.length-1)
+			{
+				functionCall += ",";
+			}
 		}
 	}
 	functionCall += ");"
