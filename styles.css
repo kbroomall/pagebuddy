@@ -13,6 +13,10 @@ body {
 padding: 10px;
 }
 
+.tab-content {
+background-color: #f6f6f6;
+}
+
 /* Set the fixed height of the footer here */
 #footer {
   height: 45px;
@@ -33,19 +37,12 @@ padding: 10px 0 3px 0;
 
 #adinfo {
 padding: 10px;
-background-color: #f6f6f6;
-/* margin-bottom: 10px; */
 }
 
 #content {
 padding: 10px;
-background-color: #f6f6f6;
 }
 
-#title {
-padding: 10px;
-background-color: #f6f6f6;
-}
 
 #advanced {
 padding: 10px;
