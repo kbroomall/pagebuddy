@@ -15,9 +15,19 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	else if(message.type=='pr_pin'){prPinAllPanels();}
 	else if(message.type=='pr_highlight')
 	{
-		prHighlight(message.color, message.opacity);
+		prHighlight(message.bannercolor, message.panelcolor, message.opacity);
 	}
-	
+	else if(message.type=='injected_function')
+	{
+		if(message.args)
+		{
+			addFunction(message.passed_function, message.function_name, message.args);
+		}
+		else
+		{
+			addFunction(message.passed_function, message.function_name);
+		}
+	}
 });
 
 
@@ -38,8 +48,7 @@ function addScript(script){
 }
 
 function getPRIds(){
-	addScript("var a = document.createElement('p'); a.id='pridsElement'; a.style.display='none'; a.innerText=prids;document.body.appendChild(a)");
-	return document.getElementById("pridsElement").innerText;
+	return getDomVariable("prids");
 }
 	
 //Displays links to PointRoll pids that link to AdPortal
@@ -131,19 +140,44 @@ console.log("inside of PI event to pin");
 };
 
 /* ad highlighting function, c=color o=opacity*/
-function prHighlight(c,o){
+/*function prHighlight(bc,pc,o){
 	var script = "for(n=0;n<(prids.split(',').length);n++){"
 	script += "try{"
-	script += "document.getElementById('prw'+prids.split(',')[n]).style.backgroundColor='"+c+"';";
+	script += "document.getElementById('prw'+prids.split(',')[n]).style.backgroundColor='"+bc+"';";
 	script += "document.getElementById('prflsh'+prids.split(',')[n]).style.opacity='"+o+"';"
-	script+= "}catch(e){}}";
+	script += "document.getElementById('prf'+prids.split(',')[n]).style.backgroundColor='"+pc+"';";
+	script += "}catch(e){}}";
+	script += "if(prup!=0){document.getElementById('prinner'+prids.split(',').pop()).style.opacity="+o+";}";
+	script += "prAddEvent('pi',(function(z){";
+	script += "for(n=0;n<(prids.split(',').length);n++){";
+	script += "try{document.getElementById('prinner'+prids.split(',')[n]).style.opacity="+o+";}catch(e){}}}));";
 	addScript(script);
+}*/
+
+function getDomVariable (variable)
+{
+	addScript("var a = document.createElement('p'); a.id='"+variable+"Element'; a.style.display='none'; a.innerText="+variable+";document.body.appendChild(a)");
+	return document.getElementById("pridsElement").innerText;
 }
 
-
-
-
-
-
+/* Add JS function to parent page. Pass it the function, name of the function, and argument list as array. Currently only supports string arguments.*/
+function addFunction (script, scriptName, args)
+{
+	addScript(script);
+	var functionCall = scriptName + "(";
+	if(typeof(args) !== "undefined")
+	{
+		for (i=0;i<args.length;i++)
+		{
+			functionCall += "'" + args[i] + "'";
+			if (i<args.length-1)
+			{
+				functionCall += ",";
+			}
+		}
+	}
+	functionCall += ");"
+	addScript(functionCall);
+}
 
 
