@@ -59,17 +59,8 @@
         <div role="tabpanel" class="tab-pane fade" id="messages">
           
           <div id="advanced">
-		  
-			<button class="btn btn-default" id="pin" title="Dev Tools must be Open to use this feature (CTRL/SHFT/I)">
-              Pin Panel
-          </button>
-          <button class="btn btn-default" id="close" title="Dev Tools must be Open to use this feature (CTRL/SHFT/I)">
-            Close Panel
-          </button>
-		  <div id="highlight" class="btn-group" role="group" aria-label="...">
-			  <button id="highlight-on" type="button" class="btn btn-default">Highlight ON</button>
-			  <button id="highlight-off" type="button" class="btn btn-default">Highlight OFF</button>
-		  </div>
+			<p>Open Tab</p>
+
 		  </div>
 	  </div>
 	  <div role="tabpanel" class="tab-pane fade" id="settings">
@@ -80,10 +71,33 @@
     </div>
     
 	<div id="footer">
-	<a id="feedback" href="https://support.pointroll.com" target="_blank" title="To provide feedback submit a ticket to PointRoll Campaign Technical Support"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-	<a id="settings" href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="holder for color-picker"></span></a>
-	<a id="info" href="http://goo.gl/q21nO6" target="_blank"><span class="glyphicon glyphicon-paperclip" aria-hidden="true" title="A quick multi-ad test page for testing PageBuddy"></span></a>
-	<a id="info" href="info.html" target="_blank" title="Opens a page with information about PageBuddy"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+
+		<div class="pull-left">
+			  <div id="pinpanel" class="btn-group" role="group" aria-label="...">
+				  <button id="pin" class="btn btn-default" id="pin" title="Enable this feature to Pin Open a PointRoll Panel">
+				  <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+				  </button>
+				  <button id="close" class="btn btn-default" id="close" title="Click to Close a PointRoll Panel">
+				<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+			  </button>  
+			  </div>
+		  
+		  <div id="highlight" class="btn-group" role="group" aria-label="...">
+			  <button id="highlight-on" type="button" class="btn btn-default" title="Highlight PointRoll Banners">
+			 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+			  </button>
+			  <button id="highlight-off" type="button" class="btn btn-default">
+			  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+			  </button>
+		  </div>
+		</div>
+		
+		<div class="pull-right">
+		<a id="feedback" href="https://support.pointroll.com" target="_blank" title="To provide feedback submit a ticket to PointRoll Campaign Technical Support"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+		<a id="info" href="http://goo.gl/q21nO6" target="_blank"><span class="glyphicon glyphicon-paperclip" aria-hidden="true" title="A quick multi-ad test page for testing PageBuddy"></span></a>
+		<a id="info" href="info.html" target="_blank" title="Opens a page with information about PageBuddy"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+		</div>	 
+		
 	</div>
 	
   </body>
