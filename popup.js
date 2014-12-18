@@ -25,7 +25,7 @@ function doStuffWithDOM(domContent) {
 	"Secure Protocol: Secure":"NOT Secure...";
 	content.innerHTML+="<br/>";
 	content.innerHTML+=(domContent.domain_match?"Location vs Domain: MATCH":"Location vs Domain: MISMATCH")+"<br/>";
-	adinfo.innerHTML+="PointRoll RM Ads on Page:"+"<br/>";
+	adinfo.innerHTML+="";
 	
 	/* Grab adIds passed from dev tools network tab from local storage (currently deprecated as we can use direct access to background page instead,
 	   but keeping this for now in case its needed for other pieces).*/
@@ -35,9 +35,9 @@ function doStuffWithDOM(domContent) {
 	for (var i=0;i<domContent.ads.length;i++)
 	{
 		adCount++;
-		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.ads[i].id+"'>Ad "+(i+1)+": " + background.ads[i].id+" (Status "+background.ads[i].status+")</a>" + "<br/>";
+		adinfo.innerHTML+="<li class='list-group-item'>" + "<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.ads[i].id+"'<span class='glyphicon glyphicon-tag green' aria-hidden='true' title='Tag Found'></span>" + " " + background.ads[i].id+ " (Status: "+background.ads[i].status+")</a>" +"</li>";
 	}
-	siteEventInfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
+	//siteEventInfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 
 }
 
