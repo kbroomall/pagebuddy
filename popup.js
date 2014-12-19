@@ -32,7 +32,7 @@ function doStuffWithDOM(domContent) {
 	
 	/*try{chrome.storage.local.get("adIds", getAdsFromStorage);}catch(e){}*/
 
-	for (var i=0;i<domContent.ads.length;i++)
+	for (var i=0;i<background.ads.length;i++)
 	{
 		adCount++;
 		adinfo.innerHTML+="<li class='list-group-item'>" + 
