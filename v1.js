@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		num_iframes:getIframes(),
 		is_secure:getSecure(),
 		domain_match:getDomains(),
-		ads:getAds(),
+		/*ads:getAds(),*/
 		site_events:getSiteEvents(),
 		prids:getPRIds()
 	});}
@@ -44,7 +44,6 @@ function addScript(script){
 		s.setAttribute('class','prInjectedScript');
 		s.style.display="none";
 	    th.appendChild(s);
-	    /*alert(document.getElementById('pridsElement').innerText)*/
 }
 
 function getPRIds(){
@@ -53,7 +52,7 @@ function getPRIds(){
 	
 //Displays links to PointRoll pids that link to AdPortal
 function getAds() {
-	var ads = [];
+	/*var ads = [];
 	var adIndex = 0;
 	
 	for (var i=0; i < document.scripts.length; i++)
@@ -88,7 +87,8 @@ function getAds() {
 	}
 
 
-	return ads;
+	return ads;*/
+	return chrome.extension.getBackgroundPage().ads;
 }
 
 //check flash version and return to window
@@ -156,7 +156,7 @@ console.log("inside of PI event to pin");
 
 function getDomVariable (variable)
 {
-	addScript("var a = document.createElement('p'); a.id='"+variable+"Element'; a.style.display='none'; a.innerText="+variable+";document.body.appendChild(a)");
+	addScript("var a = document.createElement('p'); a.id='"+variable+"Element'; a.style.display='none'; if(typeof("+variable+")!== 'undefined'){a.innerText="+variable+";}else{a.innerText='';}document.body.appendChild(a)");
 	return document.getElementById("pridsElement").innerText;
 }
 

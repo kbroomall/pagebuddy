@@ -32,10 +32,21 @@ function doStuffWithDOM(domContent) {
 	
 	/*try{chrome.storage.local.get("adIds", getAdsFromStorage);}catch(e){}*/
 
-	for (var i=0;i<domContent.ads.length;i++)
+	for (var i=0;i<background.ads.length;i++)
 	{
 		adCount++;
-		adinfo.innerHTML+="<li class='list-group-item'>" + "<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.ads[i].id+"'<span class='glyphicon glyphicon-tag green' aria-hidden='true' title='Tag Found'></span>" + " " + background.ads[i].id+ " (Status: "+background.ads[i].status+")</a>" +"</li>";
+		if(background.ads[i].adType != "container_tag" || background.ads[i].adType != "site_event")
+		{
+			adinfo.innerHTML += "<li class='list-group-item'><a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.ads[i].id
+				+ "'<span class='glyphicon glyphicon-tag green' aria-hidden='true' title='Tag Found'></span>" 
+				+ " " + background.ads[i].id+ " (Status: "+background.ads[i].status+")</a>" +"</li>";
+		}
+		else
+		{
+			adinfo.innerHTML += "<li class='list-group-item'>" + background.ads[i].id
+				+ "'<span class='glyphicon glyphicon-tag green' aria-hidden='true' title='Tag Found'></span>" 
+				+ " " + background.ads[i].id+ " (Status: "+background.ads[i].status+")" +"</li>";
+		}
 	}
 	//siteEventInfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 
@@ -71,7 +82,15 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	{
 		adCount++;
 		adinfo = document.getElementById("adinfo");
-		adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+message.adID+"'>Ad "+adCount+": " + message.adID+" (Status "+message.status+")</a><br/>";
+		if(message.adType != "container_tag" || message.adType != "site_event")
+		{
+			adinfo.innerHTML+="<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+ message.adID + "'>Ad "+adCount+": " + message.adID+" (Status "+message.status+")</a>";
+		}
+		else
+		{
+			adinfo.innerHTML+="Ad "+adCount+": " + message.adID+" (Status "+message.status+")";
+		}
+		adinfo.innerHTML+="<br/>";
 	}
 });
 

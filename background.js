@@ -2,14 +2,6 @@ var connections = {};
 var myPort;
 var ads = new Array();
 
-chrome.runtime.onMessage.addListener (function(message){
-	if (message.type == "delete_adids")
-	{
-		delete ads
-		ads = new Array();
-	}
-});
-
 /* clean up old ad info. Also need to add functionality to refresh this on page reload */
 /*chrome.storage.local.remove("adIds");*/
 
@@ -55,15 +47,47 @@ chrome.runtime.onConnect.addListener(function (port) {
     });
 });
 
+chrome.webNavigation.onBeforeNavigate.addListener (function(details){
+	delete ads;
+	ads = new Array();
+	return;
+});
+
 chrome.webRequest.onCompleted.addListener(function(details){
+	var newAdId, ad, adType;
 	if (details.url.indexOf("PortalServe")>-1)
 	{
-		var newAdId = details.url.split("pid=")[1].slice(0,7);
-		var ad = {id:newAdId, status:details.statusCode};
-		try{ads.push(ad);}catch(e){alert(e.message);}
+		newAdId = details.url.split("pid=")[1].slice(0,7);
+		if(details.url.indexOf("pos=i") > -1)
+		{
+			adType = "image";
+		}
+		else if (details.url.indexOf("pos=o") > -1)
+		{
+			adType = "in_stream";
+		}
+		else
+		{
+			adType = "rich_media";
+		}
+	}
+	else if (details.url.indexOf("ev.ads.pointroll.com") > -1)
+	{
+		newAdId = details.url.split("ss=")[1].slice(0,36);
+		adType = "site_event";
+	}
+	else if (details.url.indexOf("container.pointroll.com") > -1)
+	{
+		newAdId = details.url.split("ctid=")[1].slice(0,36);
+		adType = "container_tag";
+	}
+	if (typeof(newAdId)!=="undefined")
+	{
+		ad = {id:newAdId, status:details.statusCode, type:adType};
+		try{ads.push(ad);}catch(e){}
 		if (chrome.extension.getViews({type: "popup"}).length > 0)
 		{
-			chrome.runtime.sendMessage({type:"ad_call", status: details.statusCode, adID: newAdId});
+			chrome.runtime.sendMessage({type:"ad_call", status: details.statusCode, adID: newAdId, adType:adType});
 			/*backgroundPageConnection.postMessage({
 				type: "ad_call",
 				tabId: chrome.devtools.inspectedWindow.tabId,
@@ -71,5 +95,6 @@ chrome.webRequest.onCompleted.addListener(function(details){
 			});*/
 		}
 	}
+		
 },{urls: [ "<all_urls>" ]},['responseHeaders']);
 
