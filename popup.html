@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>PointRoll Page Buddy</title>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	<link rel="stylesheet" href="pure-min.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.css">
@@ -15,8 +15,17 @@
 	<script src="popup.js"></script>
   </head>
   <body>
-	<img id="logo" src="pointroll.PNG">
 
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="http://www.pointroll.com">
+						<img alt="PointRoll" src="icon24.png">
+					</a>
+					<p class="navbar-text">PointRoll PageBuddy</p>
+				</div>
+				</div>
+		</nav>
   	
 	<div role="tabpanel">
       
@@ -24,7 +33,7 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
           <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-            <span class="glyphicon glyphicon-tags" aria-hidden="true" title="PointRoll Tags on Page"></span>  <!-- 1st Tab -->
+            <span class="glyphicon glyphicon-tags" aria-hidden="true" title="Tag Finder Tab"></span>  <!-- 1st Tab -->
           </a>
         </li>
         <li role="presentation">
@@ -32,20 +41,10 @@
              <span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="General Page Information"></span> <!-- 2nd Tab -->
           </a>
         </li>
-        <li role="presentation">
-          <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
-            <span class="glyphicon glyphicon-globe" aria-hidden="true" title="Stats"></span> <!-- 3rd Tab -->
-          </a>
-        </li>
-		<li role="presentation">
-          <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
-            <span class="glyphicon glyphicon-stats" aria-hidden="true" title="Stats"></span> <!-- 4th Tab -->
-          </a>
-        </li>
-        <li role="presentation">
-          <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">
-            <span class="glyphicon glyphicon-transfer" aria-hidden="true" title="Requests"></span> <!-- 5th Tab -->
-          </a>
+		 <li role="presentation">
+          <a href="#advanced" aria-controls="profile" role="tab" data-toggle="tab">
+             <span class="glyphicon glyphicon-globe" aria-hidden="true" title="Advanced Tab"></span> <!-- 3rd Tab -->
+		  </a>
         </li>
       </ul>
       
@@ -61,7 +60,7 @@
           <div id="content">
           </div>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="messages">
+        <div role="tabpanel" class="tab-pane fade" id="advanced">
           
           <div id="advanced">
 			<p>Open Tab</p>

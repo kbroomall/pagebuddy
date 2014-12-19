@@ -13,6 +13,12 @@ body {
 padding: 10px;
 }
 
+#content {
+font-family: 'Droid Sans', sans-serif;
+text-decoration: none;
+font-size: 16px;
+}
+
 .tab-content {
 background-color: #f6f6f6;
 }
@@ -74,3 +80,18 @@ display: inline;
 }
 
 a.glyphicon.glyphicon-tag {text-decoration: none;}
+
+.green {
+color:green;
+}
+
+#adinfo li a {
+font-family: 'Droid Sans', sans-serif;
+text-decoration: none;
+font-size: 16px;
+}
+
+p.navbar-text {
+font-family: 'Droid Sans', sans-serif;
+font-size: 16px;
+}

@@ -35,7 +35,14 @@ function doStuffWithDOM(domContent) {
 	for (var i=0;i<domContent.ads.length;i++)
 	{
 		adCount++;
-		adinfo.innerHTML+="<li class='list-group-item'>" + "<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+background.ads[i].id+"'<span class='glyphicon glyphicon-tag green' aria-hidden='true' title='Tag Found'></span>" + " " + background.ads[i].id+ " (Status: "+background.ads[i].status+")</a>" +"</li>";
+		adinfo.innerHTML+="<li class='list-group-item'>" + 
+		"<a target='_blank' href='http://adportal.pointroll.com/Tools.aspx?pid="+
+		background.ads[i].id+ 
+		"'><span class='glyphicon glyphicon-tag green' aria-hidden='true' title='Tag Found'></span>" + 
+		" " +
+		background.ads[i].id+ 
+		" (Status: "+background.ads[i].status+")</a>" +
+		"</li>";
 	}
 	//siteEventInfo.innerHTML+="<br/>"+"Site Events: " + "<br/>" + domContent.site_events+"<br/>";
 
